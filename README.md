@@ -1,7 +1,7 @@
 
 # Vehicle Detection Project
 
-**Here's a [link to the result video!](./project_video_o.mp4)**
+**Here's a [link to the result video!](./project_video_output.mp4)**
 
 The goals / steps of this project are the following:
 
@@ -80,7 +80,7 @@ Here is a sample image of the boxes and the heatmap.
 
 ### Video Implementation
 
-#### 1. Here's a [link to my video result](./project_video_o.mp4)
+#### 1. Here's a [link to my video result](./project_video_output.mp4)
 
 
 #### 2.Implementing filter for false positives and combining overlapping bounding boxes.
