@@ -1,7 +1,7 @@
 
 # Vehicle Detection Project
 
-** Here's a [link to the result video!](./project_video_o.mp4)
+** Here's a [link to the result video!](./project_video_o.mp4) **
 
 The goals / steps of this project are the following:
 
