@@ -1,5 +1,5 @@
 
-# **Vehicle Detection Project**
+# Vehicle Detection Project
 
 The goals / steps of this project are the following:
 
@@ -16,19 +16,11 @@ The dataset used for this project is provided by Udacity.
 
 The dataset should be downlaoded, and all the files from each directory should be put in the "vehicle" and "non-vehicle" respective directories in the dataset folder.
 
-## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
-### Here I will consider the rubric points individually and describe how I addressed each point in my implementation.  
-
----
-### Writeup / README
-
-#### 1. Provide a Writeup / README that includes all the rubric points and how you addressed each one.
-
-You're reading it!
+## Rubric Points
 
 ### Histogram of Oriented Gradients (HOG), Spatial, and Image Color space
 
-#### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+#### 1. Extracting HOG features from the training images.
 
 The code for this step is contained in `HOG` and `spatial and color binning` sections of the IPython notebook.
 
@@ -43,7 +35,7 @@ Here is an example using the `YCrCb` color space and HOG parameters of `orientat
 
 ![alt text](output_images/hog.jpg)
 
-#### 2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Settling on final choice of HOG parameters.
 
 I tried various combinations of parameters and found that the following are the best:
 * orientations: 9
@@ -54,13 +46,13 @@ I tried various combinations of parameters and found that the following are the 
 
 The process was done manually through trial and error. I wish there was a more ingenious or clever way of doing this, but I couldn't come across any. 
 
-#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Training a classifier using your selected HOG features.
 
 I trained a linear SVM using scikit-learn's implementation. This model was used because it provided a rather good accuracy at a very fast learning rate. This implementation is under the **Training the classifier** section of the notebook. It seemed that the default parameters for the classifier were more than adequate for an excellent training result, so no hyperparameter optimization was necessary.
 
 ### Sliding Window Search
 
-#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1.Implementing a sliding window search.
 
 I decided to search in 3 main horizontal sections of the image: 
 1. the middle portion (looking for small cars in the distance)
@@ -71,7 +63,7 @@ I used a sliding window search for each of these horizontal sections, sliding up
 
 ![alt text](output_images/sliding_window.jpg)
 
-#### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+#### 2.Examples of test images; optimizing classifier.
 
 Following the aforementioned sliding window approach, it was evident that there was _too much_ overlap between the sliding windows. Since these sliding windows are vital to ensuring a robust image search, I did not remove this functionality, but instead added another one: heat maps. Using this method, I was able to keep boxes that had more than a specific threshold of boxes around them (threshold was 1 in this case).
 
@@ -86,11 +78,10 @@ Here is a sample image of the boxes and the heatmap.
 
 ### Video Implementation
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video_o.mp4)
+#### 1. Here's a [link to my video result](./project_video_o.mp4)
 
 
-#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2.Implementing filter for false positives and combining overlapping bounding boxes.
 See # 2 of section **Sliding Window Search** above.
 
 ![alt text](output_images/heatmap1.jpg)
@@ -109,7 +100,6 @@ See # 2 of section **Sliding Window Search** above.
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 While this pipeline performs rather well on the specified video, it still remains to be seen if it will work generally on all kinds of roads. For example, it might be difficult for this implementation to succeed in areas where the road conditions offer a drastically different color palette (say, a very white road in Alaska, USA). Furthermore, the `find_car` function is rather slow, even when using pre-filtering of HOG features. Perhaps a C/C++ implementation of this project could be faster, but for now this would not be suitable in a real-time car detection system.
 
 Another pitfall of this implementation is the jaggedness of the boxes. One way to smoothen this out would be to calculate a moving average of the bounding box, allowing for a smoother transition from one frame to another.
